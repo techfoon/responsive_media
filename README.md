@@ -25,7 +25,7 @@ Add the package to your `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  responsive_media: ^1.1.1
+  responsive_media: ^1.1.3
 ```
 
 ### 2. Fetch the Package
