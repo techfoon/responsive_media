@@ -1,4 +1,16 @@
 include: package:flutter_lints/flutter.yaml
 
-# Additional information about this file can be found at
-# https://dart.dev/guides/language/analysis-options
+analyzer:
+  exclude:
+    - build/** # Exclude build files (optional, if you have generated build artifacts)
+
+linter:
+  rules:
+    # Recommended rules (add/remove based on your needs)
+    - prefer_const_constructors # Use const constructors where possible
+    - prefer_const_declarations # Use const for final variables initialized with constants
+    - avoid_unnecessary_containers # Avoid containers that don't add functionality
+    - avoid_print # Avoid using print statements in production code
+    - prefer_final_fields # Use final for fields that are never reassigned
+    - annotate_overrides # Annotate overridden methods
+    - curly_braces_in_flow_control_structures # Enforce braces for if/else/loops

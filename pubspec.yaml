@@ -5,7 +5,7 @@ version: 1.0.0
 # Website for your package (optional but good)
 homepage: https://techfoon.com/packages/responsive_media
 
-# GitHub repo
+# GitHub repository and issue tracker
 repository: https://github.com/techfoon/responsive_media
 issue_tracker: https://github.com/techfoon/responsive_media/issues
 
@@ -13,13 +13,17 @@ issue_tracker: https://github.com/techfoon/responsive_media/issues
 environment:
   sdk: ">=2.18.0 <4.0.0"
 
+# Flutter dependencies
 dependencies:
   flutter:
     sdk: flutter
 
+# Development dependencies for testing and linting
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_lints: ^2.0.0 # Recommended linting rules for Flutter
 
+# Flutter-specific configuration
 flutter:
   uses-material-design: true
