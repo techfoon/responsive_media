@@ -7,6 +7,7 @@ analyzer:
 linter:
   rules:
     # Recommended rules (add/remove based on your needs)
+    - public_member_api_docs
     - prefer_const_constructors # Use const constructors where possible
     - prefer_const_declarations # Use const for final variables initialized with constants
     - avoid_unnecessary_containers # Avoid containers that don't add functionality
@@ -14,3 +15,4 @@ linter:
     - prefer_final_fields # Use final for fields that are never reassigned
     - annotate_overrides # Annotate overridden methods
     - curly_braces_in_flow_control_structures # Enforce braces for if/else/loops
+
