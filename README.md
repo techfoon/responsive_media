@@ -104,6 +104,43 @@ Padding(
 
 ---
 
+# 📐 ResponsiveMedia: Typography Sizes and Breakpoints
+
+## Typography Sizes (Responsive Scaling)
+
+This table defines the responsive typography scaling used across different screen sizes (XS to XL). Adjustments are made based on the screen's shortest side to ensure optimal readability and design consistency.
+
+| **Style**   | **XS** | **S** | **M** | **L** | **XL** |
+|-------------|--------|-------|-------|-------|--------|
+| **h1**      | 20     | 22    | 24    | 26    | 28     |
+| **h2**      | 18     | 20    | 22    | 24    | 26     |
+| **h3**      | 16     | 18    | 20    | 22    | 24     |
+| **h4**      | 15     | 16    | 18    | 20    | 22     |
+| **h5**      | 14     | 15    | 16    | 18    | 20     |
+| **h6**      | 13     | 14    | 15    | 16    | 18     |
+| **title**   | 18     | 19    | 20    | 21    | 22     |
+| **subtitle**| 16     | 17    | 18    | 19    | 20     |
+| **body**    | 14     | 15    | 16    | 17    | 18     |
+| **caption** | 12     | 13    | 14    | 15    | 16     |
+| **button**  | 13     | 14    | 15    | 16    | 17     |
+| **overline**| 11     | 12    | 13    | 14    | 15     |
+
+---
+
+## 📱 Breakpoints
+
+The following breakpoints define the screen width ranges (shortest side) and their respective categories:
+
+| **Breakpoint** | **Screen Width (shortest side)** |
+|-----------------|----------------------------------|
+| **XS**         | `< 320`                          |
+| **S**          | `>= 320 and < 480`              |
+| **M**          | `>= 480 and < 720`              |
+| **L**          | `>= 720 and < 1080`             |
+| **XL**         | `>= 1080`                       |
+
+---
+
 ### ✅ Examples of Typography Use
 
 #### 1. Large Headline (`h1Style`)
