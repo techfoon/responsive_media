@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [1.2.0] - 2025-04-16
+## [1.1.0] - 2025-04-16
 
 ### ✨ Summary
 This release focuses on improving responsiveness with dynamic breakpoints, typography, and shorthand extensions for responsive values.
@@ -55,7 +55,7 @@ This release focuses on improving responsiveness with dynamic breakpoints, typog
 
 ## Coming Soon (Planned)
 
-### 🚧 [1.3.0] - TBD
+### 🚧 [1.2.0] - TBD
 - `ResponsiveMediaBuilder` widget for automatic context injection.
 - More typography levels: `h3Style` through `h6Style`.
 - Color-aware themes: light/dark mode text styles.
