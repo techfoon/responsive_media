@@ -9,7 +9,7 @@
 - 🖥 **Cross-Device Compatibility**: Works seamlessly across all devices, including phones, tablets, and web, in both portrait and landscape modes.
 - 🧮 **Auto-Scaling**: Dynamically calculates typography, spacings, and other UI elements based on the shortest screen side.
 - 🔧 **Intuitive Extensions**: Use shorthand extensions like `0.02.rh`, `0.05.rw`, and `0.04.rs` to define dimensions relative to screen height, width, or shortest side.
-- 🛠 **Predefined Typography & Spacings**: Built-in responsive styles for typography (`h1Style`, `h2Style`, etc.) and consistent spacings with `gapS()`, `gapM()`, etc.
+- 🛠 **Predefined Typography & Spacings**: Built-in responsive sizes for typography (`h1`, `h2`, etc.) and consistent spacings with `gapS()`, `gapM()`, etc.
 - 🎛 **Customizable Scaling**: Fine-tune scaling globally using an optional `scale` factor.
 - 🏗 **Central Initialization**: Initialize once with `.init(context)` and access features globally.
 
@@ -70,12 +70,69 @@ Widget build(BuildContext context) {
 
 Once initialized, you can access `ResponsiveMedia` globally using `ResponsiveMedia.instance`.
 
+#### Example:
+
 ```dart
 final rm = ResponsiveMedia.instance;
 
 Padding(
   padding: rm.defaultPadding, // Responsive padding
-  child: Text("Welcome!", style: rm.h1Style), // Responsive text style
+  child: Text(
+    "Welcome!",
+    style: TextStyle(
+      fontSize: rm.h1, // Responsive size
+    ),
+  ),
+);
+
+ElevatedButton(
+  onPressed: () {},
+  child: Text(
+    "Click Here",
+    style: TextStyle(
+      fontSize: rm.buttonText, // Responsive button text
+    ),
+  ),
+);
+```
+
+---
+
+## 📏 Using `shortestSide` for Responsive Widget Sizing
+
+The `shortestSide` value allows you to build responsive layouts that scale proportionally on both portrait and landscape screens, including tablets and foldable devices.
+
+### ✨ Why Use `shortestSide`?
+
+- 📱 Works great for portrait and landscape orientations.
+- 🧠 Ensures consistent spacing and sizing across various screen dimensions.
+- 📐 Especially useful for widgets like `Container`, `SizedBox`, `Padding`, `Margins`, etc.
+
+#### Example:
+
+```dart
+Container(
+  height: rm.shortestSide * 0.2, // 20% of shortest screen dimension
+  width: rm.screenWidth,         // Full screen width
+  child: RichText(
+    text: TextSpan(
+      text: "Login Account \n",
+      style: TextStyle(
+        fontWeight: FontWeight.bold,
+        fontSize: rm.h1 * 1.5, // Scaled responsive headline
+        color: Colors.black,
+      ),
+      children: [
+        TextSpan(
+          text: "Please login into your account",
+          style: TextStyle(
+            fontSize: rm.h2, // Base responsive subtitle
+            color: Colors.grey,
+          ),
+        ),
+      ],
+    ),
+  ),
 );
 ```
 
@@ -87,49 +144,47 @@ Padding(
 
 ### Typography Levels
 
-| Level            | Typical Use Case                     |
-|-------------------|--------------------------------------|
-| `h1`              | Large headlines or titles           |
-| `h2`              | Section titles                      |
-| `h3`              | Subtitles or smaller headings       |
-| `h4`              | Labels or smaller subtitles         |
-| `h5`              | Supporting text or captions         |
-| `h6`              | Smallest text, often for hints      |
-| `title`           | Highlighted section titles          |
-| `subtitle`        | Descriptive subtitles               |
-| `body`            | General-purpose paragraph text      |
-| `caption`         | Small captions for images or labels |
-| `button`          | Button text                         |
-| `overline`        | Overline text, often for emphasis   |
+| Level      | Typical Use Case                                      |
+|------------|-------------------------------------------------------|
+| `h1`       | Page titles or major headlines                        |
+| `h2`       | Section headers                                       |
+| `h3`       | Subsection headers or prominent subtitles             |
+| `h4`       | Smaller section labels or content headers             |
+| `h5`       | Supporting information or medium emphasis             |
+| `h6`       | Least prominent headings or field hints               |
+| `title`    | Featured titles, cards, or callouts                  |
+| `subtitle` | Descriptive text below titles                         |
+| `body`     | Standard content text or paragraphs                  |
+| `caption`  | Secondary labels, annotations, or image tags          |
+| `button`   | Text inside buttons or interactive elements           |
+| `overline` | Uppercase labels above headings or cards              |
 
 ---
 
-# 📐 ResponsiveMedia: Typography Sizes and Breakpoints
+## 📐 Typography Sizes and Breakpoints
 
-## Typography Sizes (Responsive Scaling)
+### Typography Sizes (Responsive Scaling)
 
 This table defines the responsive typography scaling used across different screen sizes (XS to XL). Adjustments are made based on the screen's shortest side to ensure optimal readability and design consistency.
 
-| **Style**   | **XS** | **S** | **M** | **L** | **XL** |
-|-------------|--------|-------|-------|-------|--------|
-| **h1**      | 20     | 22    | 24    | 26    | 28     |
-| **h2**      | 18     | 20    | 22    | 24    | 26     |
-| **h3**      | 16     | 18    | 20    | 22    | 24     |
-| **h4**      | 15     | 16    | 18    | 20    | 22     |
-| **h5**      | 14     | 15    | 16    | 18    | 20     |
-| **h6**      | 13     | 14    | 15    | 16    | 18     |
-| **title**   | 18     | 19    | 20    | 21    | 22     |
-| **subtitle**| 16     | 17    | 18    | 19    | 20     |
-| **body**    | 14     | 15    | 16    | 17    | 18     |
-| **caption** | 12     | 13    | 14    | 15    | 16     |
-| **button**  | 13     | 14    | 15    | 16    | 17     |
-| **overline**| 11     | 12    | 13    | 14    | 15     |
+| Style         | XS  | S   | M   | L   | XL  |
+|---------------|-----|-----|-----|-----|-----|
+| `h1`          | 20  | 22  | 24  | 26  | 28  |
+| `h2`          | 18  | 20  | 22  | 24  | 26  |
+| `h3`          | 16  | 18  | 20  | 22  | 24  |
+| `h4`          | 15  | 16  | 18  | 20  | 22  |
+| `h5`          | 14  | 15  | 16  | 18  | 20  |
+| `h6`          | 13  | 14  | 15  | 16  | 18  |
+| `title`       | 26  | 30  | 33  | 37  | 41  |
+| `subtitle`    | 22  | 26  | 30  | 33  | 37  |
+| `body`        | 18  | 22  | 26  | 30  | 33  |
+| `caption`     | 15  | 18  | 22  | 26  | 30  |
+| `buttonText`  | 13  | 14  | 15  | 16  | 17  |
+| `overline`    | 13  | 17  | 20  | 24  | 28  |
 
 ---
 
 ## 📱 Breakpoints
-
-The following breakpoints define the screen width ranges (shortest side) and their respective categories:
 
 | **Breakpoint** | **Screen Width (shortest side)** |
 |-----------------|----------------------------------|
@@ -139,54 +194,28 @@ The following breakpoints define the screen width ranges (shortest side) and the
 | **L**          | `>= 720 and < 1080`             |
 | **XL**         | `>= 1080`                       |
 
----
+✅ **Examples of Typography Use**
 
-### ✅ Examples of Typography Use
-
-#### 1. Large Headline (`h1Style`)
+Here are some common examples of how to use responsive typography in your app:
 
 ```dart
+final rm = ResponsiveMedia.instance;
+
+// Example 1: Large Headline (h1)
 Text(
   'Welcome to Flutter!',
-  style: ResponsiveMedia.instance.h1Style, // Dynamically scaled h1
+  style: TextStyle(
+    fontSize: rm.h1,
+    fontWeight: FontWeight.bold,
+  ),
 );
-```
 
-#### 2. Section Title (`h2Style`)
-
-```dart
+// Example 2: Section Title (h2)
 Text(
   'Features',
-  style: ResponsiveMedia.instance.h2Style, // Dynamically scaled h2
-);
-```
-
-#### 3. Paragraph Text (`bodyStyle`)
-
-```dart
-Text(
-  'This is an example of paragraph text, which is dynamically scaled for consistent readability across devices.',
-  style: ResponsiveMedia.instance.bodyStyle, // Dynamically scaled paragraph text
-);
-```
-
-#### 4. Caption Text (`captionStyle`)
-
-```dart
-Text(
-  'Image description goes here.',
-  style: ResponsiveMedia.instance.captionStyle, // Dynamically scaled caption
-);
-```
-
-#### 5. Button Text (`buttonStyle`)
-
-```dart
-TextButton(
-  onPressed: () {},
-  child: Text(
-    'Click Me',
-    style: ResponsiveMedia.instance.buttonStyle, // Dynamically scaled button text
+  style: TextStyle(
+    fontSize: rm.h2,
+    fontWeight: FontWeight.w600,
   ),
 );
 ```
@@ -199,25 +228,57 @@ TextButton(
 
 `ResponsiveMedia` provides pre-defined spacing widgets like `gapS()`, `gapM()`, and `gapL()` to maintain consistent spacing between UI elements.
 
-#### Spacing Example
+#### Example:
 
 ```dart
+
+final rm = ResponsiveMedia.instance;
+
 Column(
   children: [
-    Text('Step 1', style: ResponsiveMedia.instance.h2Style),
-    ResponsiveMedia.instance.gapS(), // Small gap
-    Text('Enter your details', style: ResponsiveMedia.instance.bodyStyle),
-    ResponsiveMedia.instance.gapM(), // Medium gap
-    Text('Step 2', style: ResponsiveMedia.instance.h2Style),
+    // Using rm.h1 for responsive font size for the heading
+    Text(
+      'Step 1',
+      style: TextStyle(
+        fontSize: rm.h1, // Responsive font size for a large heading
+        fontWeight: FontWeight.bold,
+      ),
+    ),
+
+    // Using rm.gapS() for a small gap to maintain consistent spacing
+    rm.gapS(), // Adds a small responsive gap between widgets
+
+    // Using rm.h2 for a smaller heading size
+    Text(
+      'Enter your details',
+      style: TextStyle(
+        fontSize: rm.h2, // Responsive font size for a smaller heading
+        fontWeight: FontWeight.bold,
+      ),
+    ),
+
+    // Using rm.gapM() for a medium gap to visually separate sections
+    rm.gapM(), // Adds a medium responsive gap
+
+    // Using rm.h2 for consistent styling of headings
+    Text(
+      'Step 2',
+      style: TextStyle(
+        fontSize: rm.h2, // Responsive font size for another smaller heading
+        fontWeight: FontWeight.bold,
+      ),
+    ),
   ],
 );
 ```
 
 ---
 
+
+
 ### Extensions for Height, Width, and Shortest Side
 
-Custom extensions (`.rh`, `.rw`, and `.rs`) simplify dimension calculations for height, width, and shortest side.
+Custom extensions (`.rh`, `.rw`, and `.rs` and `.rl`) simplify dimension calculations for height, width, and shortest  and longest.
 
 #### Responsive Height (`rh`)
 
@@ -246,6 +307,15 @@ Container(
 );
 ```
 
+#### Responsive Logest Side (`rl`)
+
+```dart
+Container(
+  padding: EdgeInsets.all(0.02.rl), // 2% of the logest side
+  child: Text('Responsive Container'),
+);
+```
+
 ---
 
 ## 🛠 API Summary
@@ -254,14 +324,14 @@ Container(
 
 | Getter              | Description                  |
 |---------------------|------------------------------|
-| `h1Style`           | Large heading               |
-| `h2Style`           | Medium heading              |
-| `h3Style`           | Smaller heading             |
-| `h4Style`           | Label or subtitle           |
-| `bodyStyle`         | Paragraph text              |
-| `captionStyle`      | Small captions              |
-| `buttonStyle`       | Button text                 |
-| `overlineStyle`     | Overline text for emphasis  |
+| `h1`           | Large heading               |
+| `h2`           | Medium heading              |
+| `h3`           | Smaller heading             |
+| `h4`           | Label or subtitle           |
+| `body`         | Paragraph text              |
+| `caption`      | Small captions              |
+| `button`       | Button text                 |
+| `overline`     | Overline text for emphasis  |
 
 ---
 
@@ -288,6 +358,7 @@ Container(
 | `0.2.rh`    | 20% of the screen height                  |
 | `0.1.rw`    | 10% of the screen width                   |
 | `0.03.rs`   | 3% of the shortest screen side            |
+| `0.03.rl`   | 3% of the  longest screen side            |
 
 ---
 
