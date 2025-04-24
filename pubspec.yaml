@@ -3,11 +3,14 @@ description: A responsive utility for Flutter to simplify scaling text, padding,
 version: 1.2.0
 
 # Website for your package (optional but good)
-homepage: https://packages.techfoon.com/responsivemedia/gi
+homepage: https://github.com/techfoon/responsivemedia
 
 # GitHub repository and issue tracker
 repository: https://github.com/techfoon/responsive_media
 issue_tracker: https://github.com/techfoon/responsive_media/issues
+
+# License for your package (must be an OSI-approved license)
+license: MIT
 
 # Dart SDK compatibility
 environment:

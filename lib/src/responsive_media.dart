@@ -399,11 +399,10 @@ class ResponsiveMedia {
   /// Determines if the screen is in landscape mode
   bool get isLandscape => orientation == Orientation.landscape;
 
- 
   /// - `portraitValue`: The value to use for portrait orientation.
   /// - `landscapeValue`: The value to use for landscape orientation.
   double getResponsiveBox(double portraitValue, double landscapeValue) {
-     /// Returns a responsive size based on the current orientation
+    /// Returns a responsive size based on the current orientation
     return isPortrait ? portraitValue : landscapeValue;
   }
 

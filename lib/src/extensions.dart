@@ -1,6 +1,6 @@
 import './responsive_media.dart';
 
-/// Extension on [num] to provide responsive values for height, width, 
+/// Extension on [num] to provide responsive values for height, width,
 /// shortest side, and longest side based on the screen dimensions.
 extension ResponsiveValues on num {
   /// Returns a responsive height value based on the screen height.
