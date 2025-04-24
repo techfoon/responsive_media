@@ -165,7 +165,7 @@ class ResponsiveMedia {
         'XL': shortestSide * 0.065
       });
 
-      /// responsive h2 it will dynamicly ajust the size
+  /// responsive h2 it will dynamicly ajust the size
   double get h2 => dynamicSize({
         'XS': shortestSide * 0.038,
         'S': shortestSide * 0.043,
@@ -173,7 +173,8 @@ class ResponsiveMedia {
         'L': shortestSide * 0.053,
         'XL': shortestSide * 0.058
       });
-       /// responsive h3 it will dynamicly ajust the size
+
+  /// responsive h3 it will dynamicly ajust the size
   double get h3 => dynamicSize({
         'XS': shortestSide * 0.032,
         'S': shortestSide * 0.037,
@@ -181,7 +182,8 @@ class ResponsiveMedia {
         'L': shortestSide * 0.047,
         'XL': shortestSide * 0.052
       });
-       /// responsive h4 it will dynamicly ajust the size
+
+  /// responsive h4 it will dynamicly ajust the size
   double get h4 => dynamicSize({
         'XS': shortestSide * 0.026,
         'S': shortestSide * 0.031,
@@ -189,7 +191,8 @@ class ResponsiveMedia {
         'L': shortestSide * 0.041,
         'XL': shortestSide * 0.046
       });
-       /// responsive h5 it will dynamicly ajust the size
+
+  /// responsive h5 it will dynamicly ajust the size
   double get h5 => dynamicSize({
         'XS': shortestSide * 0.022,
         'S': shortestSide * 0.027,
@@ -197,7 +200,8 @@ class ResponsiveMedia {
         'L': shortestSide * 0.037,
         'XL': shortestSide * 0.042
       });
-       /// responsive h6 it will dynamicly ajust the size
+
+  /// responsive h6 it will dynamicly ajust the size
   double get h6 => dynamicSize({
         'XS': shortestSide * 0.02,
         'S': shortestSide * 0.025,
@@ -206,7 +210,7 @@ class ResponsiveMedia {
         'XL': shortestSide * 0.04
       });
 
- /// responsive title it will dynamicly ajust the size
+  /// responsive title it will dynamicly ajust the size
   double get title => dynamicSize({
         'XS': shortestSide * 0.051,
 
@@ -224,7 +228,8 @@ class ResponsiveMedia {
 
         /// was 0.055
       });
- /// responsive subtitle it will dynamicly ajust the size
+
+  /// responsive subtitle it will dynamicly ajust the size
   double get subtitle => dynamicSize({
         'XS': shortestSide * 0.043,
 
@@ -242,7 +247,8 @@ class ResponsiveMedia {
 
         /// was 0.05
       });
- /// responsive body it will dynamicly ajust the size
+
+  /// responsive body it will dynamicly ajust the size
   double get body => dynamicSize({
         'XS': shortestSide * 0.036,
 
@@ -261,7 +267,7 @@ class ResponsiveMedia {
         /// was 0.045
       });
 
- /// responsive caption it will dynamicly ajust the size
+  /// responsive caption it will dynamicly ajust the size
   double get caption => dynamicSize({
         'XS': shortestSide * 0.029,
 
@@ -279,7 +285,8 @@ class ResponsiveMedia {
 
         /// was 0.04
       });
- /// responsive bottonText it will dynamicly ajust the size. used for button text "click here"
+
+  /// responsive bottonText it will dynamicly ajust the size. used for button text "click here"
   double get buttonText => dynamicSize({
         'XS': shortestSide * 0.022,
 
@@ -298,7 +305,7 @@ class ResponsiveMedia {
         /// was 0.042
       });
 
- /// responsive overline it will dynamicly ajust the size
+  /// responsive overline it will dynamicly ajust the size
   double get overline => dynamicSize({
         'XS': shortestSide * 0.026,
 
@@ -317,7 +324,7 @@ class ResponsiveMedia {
         /// was 0.038
       });
 
-/// spacing to for gaps
+  /// spacing to for gaps
   double get spacingXS => shortestSide * 0.016;
 
   /// Previous: shortestSide * 0.012 (~4.5px) → Slightly increased
@@ -346,15 +353,17 @@ class ResponsiveMedia {
   /// Margin values for consistent layout spacing
   EdgeInsets get marginXS => EdgeInsets.all(spacingXS);
 
-    /// Small Margin values for consistent layout spacing
+  /// Small Margin values for consistent layout spacing
 
   EdgeInsets get marginS => EdgeInsets.all(spacingS);
-      ///Mediam large Margin values for consistent layout spacing
+
+  ///Mediam large Margin values for consistent layout spacing
   EdgeInsets get marginM => EdgeInsets.all(spacingM);
+
   /// large Margin values for consistent layout spacing
   EdgeInsets get marginL => EdgeInsets.all(spacingL);
 
-   /// large Margin values for consistent layout spacing
+  /// large Margin values for consistent layout spacing
   EdgeInsets get marginXL => EdgeInsets.all(spacingXL);
 
   /// Creates a gap (spacer) widget, either a custom widget or a SizedBox
@@ -371,16 +380,35 @@ class ResponsiveMedia {
 
   /// Predefined gaps for convenience
   Widget gapXS() => gap(height: spacingXS);
-    /// small Predefined gaps for convenience
+
+  /// small Predefined gaps for convenience
   Widget gapS() => gap(height: spacingS);
+
   /// Mediam Predefined gaps for convenience
   Widget gapM() => gap(height: spacingM);
+
   /// Large Predefined gaps for convenience
   Widget gapL() => gap(height: spacingL);
+
   /// extra Large Predefined gaps for convenience
   Widget gapXL() => gap(height: spacingXL);
 
+  /// Determines if the screen is in portrait mode
+  bool get isPortrait => orientation == Orientation.portrait;
+
+  /// Determines if the screen is in landscape mode
+  bool get isLandscape => orientation == Orientation.landscape;
+
+ 
+  /// - `portraitValue`: The value to use for portrait orientation.
+  /// - `landscapeValue`: The value to use for landscape orientation.
+  double getResponsiveBox(double portraitValue, double landscapeValue) {
+     /// Returns a responsive size based on the current orientation
+    return isPortrait ? portraitValue : landscapeValue;
+  }
+
   /// Provides a string representation of the instance for debugging
+
   @override
   String toString() {
     return 'ResponsiveMedia(h1: ${h1.toStringAsFixed(2)}, subtitle: ${subtitle.toStringAsFixed(2)}, scale: $scale)';

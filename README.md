@@ -25,7 +25,7 @@ Add the package to your `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  responsive_media: ^1.1.3
+  responsive_media: ^1.2.0
 ```
 
 ### 2. Fetch the Package
@@ -137,6 +137,103 @@ Container(
 ```
 
 ---
+
+# Responsive Orientation Utilities
+
+This package provides utility methods to handle responsive design based on screen orientation. It includes functionality to determine whether the screen is in portrait or landscape mode and to provide responsive values based on the current orientation.
+
+## Features
+
+### 1. `isPortrait`
+Determine if the screen is in **portrait mode**.
+
+```dart
+bool get isPortrait => orientation == Orientation.portrait;
+```
+
+#### Example:
+```dart
+if (rm.isPortrait) {
+  print('The screen is in portrait mode!');
+} else {
+  print('The screen is not in portrait mode.');
+}
+```
+
+### 2. `isLandscape`
+Determine if the screen is in **landscape mode**.
+
+```dart
+bool get isLandscape => orientation == Orientation.landscape;
+```
+
+#### Example:
+```dart
+final rm = ResponsiveMedia.instance;
+if (rm.isLandscape) {
+  print('The screen is in landscape mode!');
+} else {
+  print('The screen is not in landscape mode.');
+}
+```
+
+### 3. `getResponsiveBox`
+Get a responsive value based on the current screen orientation.
+
+```dart
+double getResponsiveBox(double portraitValue, double landscapeValue) {
+  return isPortrait ? portraitValue : landscapeValue;
+}
+```
+
+#### Parameters:
+- `portraitValue`: The value to use for **portrait orientation**.
+- `landscapeValue`: The value to use for **landscape orientation**.
+
+#### Example:
+```dart
+double boxSize = rm.getResponsiveBox(100, 200);
+print('Box size: $boxSize'); 
+// Outputs 100 in portrait mode, 200 in landscape mode.
+```
+
+## Usage Examples
+
+### Example 1: Adjusting Widget Size Based on Orientation
+```dart
+Widget build(BuildContext context) {
+  ResponsiveMedia.init(context); // Initialize ResponsiveMedia
+final rm = ResponsiveMedia.instance;
+  return Container(
+    width:rm.getResponsiveBox(150, 300),
+    height: rm.getResponsiveBox(100, 200),
+    color: Colors.blue,
+    child: Center(
+      child: Text(
+        rm.isPortrait
+            ? 'Portrait Mode'
+            : 'Landscape Mode',
+        style: TextStyle(fontSize: 16, color: Colors.white),
+      ),
+    ),
+  );
+}
+```
+
+### Example 2: Dynamic Padding for Orientation
+```dart
+final rm = ResponsiveMedia.instance;
+EdgeInsets padding = rm.getResponsiveBox(
+  EdgeInsets.symmetric(horizontal: 16, vertical: 24), // Portrait padding
+  EdgeInsets.symmetric(horizontal: 32, vertical: 16), // Landscape padding
+);
+
+return Padding(
+  padding: padding,
+  child: Text('Responsive Padding Example'),
+);
+```
+
 
 ## 🖋 Responsive Typography
 
@@ -330,7 +427,7 @@ Container(
 | `h4`           | Label or subtitle           |
 | `body`         | Paragraph text              |
 | `caption`      | Small captions              |
-| `button`       | Button text                 |
+| `buttonText`       | Button text                 |
 | `overline`     | Overline text for emphasis  |
 
 ---
@@ -373,6 +470,19 @@ Container(
 | Lightweight              | ✅ Zero dependencies | ⚠️ Heavier         |
 
 ---
+
+
+## Summary Table
+
+| **Feature**            | **Description**                                                                                | **Example Usage**                                                                 |
+|------------------------|------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------|
+| **`isPortrait`**       | Returns `true` if the screen orientation is in **portrait** mode.                              | `if (ResponsiveMedia.instance.isPortrait) print('Portrait Mode');`                |
+| **`isLandscape`**      | Returns `true` if the screen orientation is in **landscape** mode.                             | `if (ResponsiveMedia.instance.isLandscape) print('Landscape Mode');`              |
+| **`getResponsiveBox`** | Dynamically returns a value based on the current orientation. Accepts `portraitValue` and `landscapeValue`. | `double size = ResponsiveMedia.instance.getResponsiveBox(100, 200);` |   
+
+---
+
+          |
 
 ## 🏗 Planned Features
 

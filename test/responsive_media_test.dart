@@ -67,5 +67,37 @@ void main() {
       expect(rm.spacingXS, closeTo(400 * 0.016, 0.01));
       expect(rm.spacingS, closeTo(400 * 0.025, 0.01));
     });
+
+    test('Orientation properties are accurate', () {
+      expect(rm.isPortrait, isTrue);
+      expect(rm.isLandscape, isFalse);
+
+      final landscapeInstance = ResponsiveMedia.testInstance(
+        screenHeight: 400,
+        screenWidth: 800,
+        orientation: Orientation.landscape,
+        shortestSide: 400,
+        longestSide: 800,
+      );
+
+      expect(landscapeInstance.isPortrait, isFalse);
+      expect(landscapeInstance.isLandscape, isTrue);
+    });
+
+    test('getResponsiveBox returns correct value based on orientation', () {
+      double value = rm.getResponsiveBox(100, 200);
+      expect(value, 100); // Portrait mode value
+
+      final landscapeInstance = ResponsiveMedia.testInstance(
+        screenHeight: 400,
+        screenWidth: 800,
+        orientation: Orientation.landscape,
+        shortestSide: 400,
+        longestSide: 800,
+      );
+
+      value = landscapeInstance.getResponsiveBox(100, 200);
+      expect(value, 200); // Landscape mode value
+    });
   });
 }

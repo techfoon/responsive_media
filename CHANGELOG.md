@@ -2,6 +2,32 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.0] - 2025-04-24
+
+### Added
+- **`isPortrait` Getter**: Determines if the screen orientation is in portrait mode.
+- **`isLandscape` Getter**: Determines if the screen orientation is in landscape mode.
+- **`getResponsiveBox` Method**: Added a utility to fetch a responsive value based on the current screen orientation. Accepts `portraitValue` and `landscapeValue` as arguments and returns the value corresponding to the current orientation.
+
+### Examples
+#### `isPortrait` and `isLandscape`:
+```dart
+if (ResponsiveMedia.instance.isPortrait) {
+  print('Portrait Mode');
+} else if (ResponsiveMedia.instance.isLandscape) {
+  print('Landscape Mode');
+}
+```
+
+#### `getResponsiveBox`:
+```dart
+double boxSize = ResponsiveMedia.instance.getResponsiveBox(100, 200);
+// Returns 100 in portrait mode, 200 in landscape mode.
+```
+
+### Improvements
+- Enhanced documentation for orientation-specific methods, including examples for better usability.
+
 ## [1.1.3] - 2025-04-21
 
 - Just `ReadMe.md` updated.
