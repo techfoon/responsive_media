@@ -25,7 +25,7 @@ Add the package to your `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  responsive_media: ^1.2.0
+  responsive_media: ^1.2.1
 ```
 
 ### 2. Fetch the Package
@@ -76,7 +76,7 @@ Once initialized, you can access `ResponsiveMedia` globally using `ResponsiveMed
 final rm = ResponsiveMedia.instance;
 
 Padding(
-  padding: rm.defaultPadding, // Responsive padding
+  padding: rm.paddingAll(5), // Responsive padding : 5% of padding from all
   child: Text(
     "Welcome!",
     style: TextStyle(
@@ -264,20 +264,21 @@ return Padding(
 
 This table defines the responsive typography scaling used across different screen sizes (XS to XL). Adjustments are made based on the screen's shortest side to ensure optimal readability and design consistency.
 
+
 | Style         | XS  | S   | M   | L   | XL  |
 |---------------|-----|-----|-----|-----|-----|
-| `h1`          | 20  | 22  | 24  | 26  | 28  |
-| `h2`          | 18  | 20  | 22  | 24  | 26  |
-| `h3`          | 16  | 18  | 20  | 22  | 24  |
-| `h4`          | 15  | 16  | 18  | 20  | 22  |
-| `h5`          | 14  | 15  | 16  | 18  | 20  |
-| `h6`          | 13  | 14  | 15  | 16  | 18  |
-| `title`       | 26  | 30  | 33  | 37  | 41  |
-| `subtitle`    | 22  | 26  | 30  | 33  | 37  |
-| `body`        | 18  | 22  | 26  | 30  | 33  |
-| `caption`     | 15  | 18  | 22  | 26  | 30  |
-| `buttonText`  | 13  | 14  | 15  | 16  | 17  |
-| `overline`    | 13  | 17  | 20  | 24  | 28  |
+| `h1`          | 26  | 28  | 30  | 32  | 36  |
+| `h2`          | 22  | 24  | 26  | 28  | 32  |
+| `h3`          | 18  | 20  | 22  | 24  | 26  |
+| `h4`          | 16  | 18  | 20  | 22  | 24  |
+| `h5`          | 15  | 16  | 18  | 20  | 22  |
+| `h6`          | 14  | 15  | 16  | 18  | 20  |
+| `title`       | 26  | 28  | 30  | 32  | 36  |
+| `subtitle`    | 22  | 24  | 26  | 28  | 32  |
+| `body`        | 18  | 20  | 22  | 24  | 26  |
+| `caption`     | 16  | 18  | 20  | 22  | 24  |
+| `buttonText`  | 14  | 16  | 18  | 20  | 22  |
+| `overline`    | 14  | 16  | 18  | 20  | 22  |
 
 ---
 
@@ -319,57 +320,326 @@ Text(
 
 ---
 
-## 🧩 Spacing and Layout
+# Gap Utility
 
-### Predefined Spacing Widgets
+The `gap` utility is a flexible and responsive tool for adding gaps or spacing between widgets in Flutter applications. It supports both vertical and horizontal gaps and scales dynamically based on the device's screen size and orientation.
 
-`ResponsiveMedia` provides pre-defined spacing widgets like `gapS()`, `gapM()`, and `gapL()` to maintain consistent spacing between UI elements.
+---
 
-#### Example:
+## Features
+
+- **Responsive Design**: Dynamically adjusts spacing sizes (`XS`, `S`, `M`, `L`, `XL`) based on the device's dimensions.
+- **Custom Gaps**: Allows specifying custom-sized gaps with optional scaling.
+- **Orientation Support**: Easily switch between vertical and horizontal gaps using `isHorizontal`.
+- **Predefined Gap Sizes**:
+
+  - `gapXS`
+  - `gapS`
+  - `gapM`
+  - `gapL`
+  - `gapXL`
+
+---
+
+## Usage
+
+### 1. **Adding a Gap**
+
+The `gap` method dynamically creates a gap of the specified size. It accepts the following parameters:
+- `customWidget`: A custom widget to use as a gap (optional).
+- `size`: The size of the gap (optional).
+- `isHorizontal`: If `true`, creates a horizontal gap; otherwise, creates a vertical gap (default is `false`).
 
 ```dart
-
+// Create an instance of ResponsiveMedia
 final rm = ResponsiveMedia.instance;
 
-Column(
-  children: [
-    // Using rm.h1 for responsive font size for the heading
-    Text(
-      'Step 1',
-      style: TextStyle(
-        fontSize: rm.h1, // Responsive font size for a large heading
-        fontWeight: FontWeight.bold,
-      ),
-    ),
-
-    // Using rm.gapS() for a small gap to maintain consistent spacing
-    rm.gapS(), // Adds a small responsive gap between widgets
-
-    // Using rm.h2 for a smaller heading size
-    Text(
-      'Enter your details',
-      style: TextStyle(
-        fontSize: rm.h2, // Responsive font size for a smaller heading
-        fontWeight: FontWeight.bold,
-      ),
-    ),
-
-    // Using rm.gapM() for a medium gap to visually separate sections
-    rm.gapM(), // Adds a medium responsive gap
-
-    // Using rm.h2 for consistent styling of headings
-    Text(
-      'Step 2',
-      style: TextStyle(
-        fontSize: rm.h2, // Responsive font size for another smaller heading
-        fontWeight: FontWeight.bold,
-      ),
-    ),
-  ],
+// Add a gap of size 5 (vertical by default)
+rm.gap(
+  size: 5, // Specifies the size of the gap
 );
 ```
 
 ---
+
+### 2. **Using Predefined Gaps**
+
+Predefined gap sizes make it easier to add consistent spacing across your app.
+
+#### Example for Vertical Gaps:
+
+```dart
+// Create an instance of ResponsiveMedia
+final rm = ResponsiveMedia.instance;
+
+// Add vertical gaps in a Column
+Column(
+  children: [
+    Text('Item 1'), // First item
+    rm.gapS(), // Adds a small vertical gap
+    Text('Item 2'), // Second item
+    rm.gapM(), // Adds a medium vertical gap
+    Text('Item 3'), // Third item
+  ],
+);
+```
+**Explanation:**
+- `gapS()` adds a small vertical gap between `Item 1` and `Item 2`.
+- `gapM()` adds a medium vertical gap between `Item 2` and `Item 3`.
+
+---
+
+#### Example for Horizontal Gaps:
+
+```dart
+// Create an instance of ResponsiveMedia
+final rm = ResponsiveMedia.instance;
+
+// Add horizontal gaps in a Row
+Row(
+  children: [
+    Icon(Icons.star), // First icon
+    rm.gapS(isHorizontal: true), // Adds a small horizontal gap
+    Icon(Icons.star), // Second icon
+    rm.gapM(isHorizontal: true), // Adds a medium horizontal gap
+    Icon(Icons.star), // Third icon
+  ],
+);
+```
+**Explanation:**
+- `gapS(isHorizontal: true)` adds a small horizontal gap between the first and second icons.
+- `gapM(isHorizontal: true)` adds a medium horizontal gap between the second and third icons.
+
+---
+
+### 3. **Custom Scaling**
+
+You can apply custom scaling to predefined gaps by passing the `scale` parameter.
+
+```dart
+// Create an instance of ResponsiveMedia
+final rm = ResponsiveMedia.instance;
+
+// Add a large gap with custom scaling
+rm.gapL(scale: 1.5); // Makes the large gap 1.5x bigger
+```
+**Explanation:**
+- The `scale` parameter multiplies the default size of the gap, making it larger or smaller based on your needs.
+- In this example, the large gap (`gapL`) is scaled up by 1.5 times.
+
+---
+
+### Examples
+
+#### **Example 1: Vertical Gaps in a Column**
+
+```dart
+// Create an instance of ResponsiveMedia
+final rm = ResponsiveMedia.instance;
+
+Column(
+  children: [
+    Text(
+      'Header', 
+      style: TextStyle(fontSize: rm.h1), // Dynamically scaled heading text
+    ),
+    rm.gapL(), // Adds a large vertical gap after the header
+    Text(
+      'Subheader', 
+      style: TextStyle(fontSize: rm.h2), // Dynamically scaled subheading text
+    ),
+    rm.gapM(), // Adds a medium vertical gap after the subheader
+    ElevatedButton(
+      onPressed: () {}, 
+      child: Text('Click Me'), // A button with no gap below
+    ),
+  ],
+);
+```
+**Explanation:**
+- `gapL()` adds a large vertical gap after the header text.
+- `gapM()` adds a medium vertical gap after the subheader text.
+
+---
+
+#### **Example 2: Horizontal Gaps in a Row**
+
+```dart
+// Create an instance of ResponsiveMedia
+final rm = ResponsiveMedia.instance;
+
+Row(
+  mainAxisAlignment: MainAxisAlignment.center, // Centers all children
+  children: [
+    Icon(Icons.arrow_back), // Back arrow icon
+    rm.gapS(isHorizontal: true), // Adds a small horizontal gap
+    Text('Go Back'), // Text in the middle of the row
+    rm.gapM(isHorizontal: true), // Adds a medium horizontal gap
+    Icon(Icons.arrow_forward), // Forward arrow icon
+  ],
+);
+```
+**Explanation:**
+- `gapS(isHorizontal: true)` adds a small horizontal gap between the back arrow and the text.
+- `gapM(isHorizontal: true)` adds a medium horizontal gap between the text and the forward arrow.
+
+---
+
+
+# Margin and Padding Utility
+
+This utility provides responsive and flexible tools for applying **margins** and **padding** to widgets in Flutter applications. The sizes dynamically adjust based on the device's screen dimensions and orientation, ensuring consistent layouts across various screen sizes.
+
+---
+
+## Features
+
+- **Responsive Design**: Dynamically calculates margins and padding as percentages of the screen dimensions.
+- **Orientation Support**: Automatically adapts to portrait and landscape modes.
+- **Customizable Sizes**: Apply margins and padding to individual or all sides of a widget.
+- **Predefined Methods**:
+  - Margin: `marginAll`, `marginVertical`, `marginHorizontal`
+  - Padding: `paddingAll`, `paddingVertical`, `paddingHorizontal`
+
+---
+
+## Notes
+
+- All margin and padding values are calculated as a **percentage of the screen's shortest dimension** (e.g., width in portrait mode).
+- This ensures that the spacing scales proportionally across different screen sizes and orientations.
+
+---
+
+## Margin
+
+### Usage
+
+#### 1. **Adding Margin to All Sides**
+Use the `marginAll` method to apply equal margins to all sides of a widget.
+
+```dart
+// Create an instance of ResponsiveMedia
+final rm = ResponsiveMedia.instance;
+
+// Add margin to all sides
+Container(
+  margin: rm.marginAll(5), // Adds margin as 5% of the screen's shortest dimension
+  child: Text('Content with margin'),
+);
+```
+
+#### 2. **Adding Vertical or Horizontal Margins**
+Use `marginVertical` for top and bottom margins, and `marginHorizontal` for left and right margins.
+
+```dart
+// Vertical margin
+Container(
+  margin: rm.marginVertical(4), // Adds vertical margin (top and bottom) as 4% of the shortest dimension
+  child: Text('Vertical Margin Example'),
+);
+
+// Horizontal margin
+Container(
+  margin: rm.marginHorizontal(3), // Adds horizontal margin (left and right) as 3% of the shortest dimension
+  child: Text('Horizontal Margin Example'),
+);
+```
+
+#### 3. **Combining Margins**
+You can also use `EdgeInsets.only` with `marginVertical` or `marginHorizontal` to customize specific sides.
+
+```dart
+Container(
+  margin: EdgeInsets.only(
+    top: rm.marginVertical(3).top, // Top margin as 3% of the shortest dimension
+    left: rm.marginHorizontal(2).left, // Left margin as 2% of the shortest dimension
+  ),
+  child: Text('Custom Margins Example'),
+);
+```
+
+---
+
+## Padding
+
+### Usage
+
+#### 1. **Adding Padding to All Sides**
+Use the `paddingAll` method to apply equal padding to all sides of a widget.
+
+```dart
+// Create an instance of ResponsiveMedia
+final rm = ResponsiveMedia.instance;
+
+// Add padding to all sides
+Container(
+  padding: rm.paddingAll(5), // Adds padding as 5% of the screen's shortest dimension
+  child: Text('Content with padding'),
+);
+```
+
+#### 2. **Adding Vertical or Horizontal Padding**
+Use `paddingVertical` for top and bottom padding, and `paddingHorizontal` for left and right padding.
+
+```dart
+// Vertical padding
+Container(
+  padding: rm.paddingVertical(4), // Adds vertical padding (top and bottom) as 4% of the shortest dimension
+  child: Text('Vertical Padding Example'),
+);
+
+// Horizontal padding
+Container(
+  padding: rm.paddingHorizontal(3), // Adds horizontal padding (left and right) as 3% of the shortest dimension
+  child: Text('Horizontal Padding Example'),
+);
+```
+
+#### 3. **Combining Padding**
+You can also use `EdgeInsets.only` with `paddingVertical` or `paddingHorizontal` to customize specific sides.
+
+```dart
+Container(
+  padding: EdgeInsets.only(
+    top: rm.paddingVertical(3).top, // Top padding as 3% of the shortest dimension
+    left: rm.paddingHorizontal(2).left, // Left padding as 2% of the shortest dimension
+  ),
+  child: Text('Custom Padding Example'),
+);
+```
+
+---
+
+## Examples
+
+### **Example 1: Applying Both Margin and Padding**
+
+```dart
+// Create an instance of ResponsiveMedia
+final rm = ResponsiveMedia.instance;
+
+Container(
+  margin: rm.marginAll(5), // Adds margin as 5% of the screen's shortest dimension to all sides
+  padding: rm.paddingAll(3), // Adds padding as 3% of the screen's shortest dimension to all sides
+  child: Text(
+    'Text with Margin and Padding',
+    style: TextStyle(fontSize: rm.h2), // Dynamically scaled text size
+  ),
+);
+```
+
+### **Example 2: Vertical and Horizontal Margins and Padding**
+
+```dart
+// Create an instance of ResponsiveMedia
+final rm = ResponsiveMedia.instance;
+
+Container(
+  margin: rm.marginVertical(4), // Adds vertical margin (top and bottom) as 4% of the shortest dimension
+  padding: rm.paddingHorizontal(3), // Adds horizontal padding (left and right) as 3% of the shortest dimension
+  child: Text('Text with Vertical Margin and Horizontal Padding'),
+);
+```
 
 
 
@@ -442,11 +712,29 @@ Container(
 | `gapM()`         | Medium predefined gap for typical spacing needs.       |
 | `gapL()`         | Large predefined gap for wider spacing.                |
 | `gapXL()`        | Extra-large predefined gap for maximum spacing.        |
-| `defaultPadding` | Uniform padding applied consistently across widgets.   |
-| `spacingXS`      | Extra-small spacing value for dense layouts.           |
-| `spacingXL`      | Extra-large spacing value for spacious layouts.        |
+
+
+# Margin and Padding Summary Table
+
+This table provides a quick overview of the predefined methods for applying **margins** and **padding** in Flutter applications using the `ResponsiveMedia` utility.
+
+| **Type**  | **Method**           | **Description**                                                                                               | **Value**                     |
+|-----------|----------------------|---------------------------------------------------------------------------------------------------------------|--------------------------------|
+| **Margin**| `marginAll`          | Adds equal margins to all sides of the widget.                                                                | Percentage of the screen's shortest dimension. |
+| **Margin**| `marginVertical`     | Adds margins to the top and bottom sides of the widget.                                                       | Percentage of the screen's shortest dimension. |
+| **Margin**| `marginHorizontal`   | Adds margins to the left and right sides of the widget.                                                       | Percentage of the screen's shortest dimension. |
+| **Padding**| `paddingAll`         | Adds equal padding to all sides of the widget.                                                                | Percentage of the screen's shortest dimension. |
+| **Padding**| `paddingVertical`    | Adds padding to the top and bottom sides of the widget.                                                       | Percentage of the screen's shortest dimension. |
+| **Padding**| `paddingHorizontal`  | Adds padding to the left and right sides of the widget.                                                       | Percentage of the screen's shortest dimension. |
 
 ---
+
+## Notes:
+1. **Values in Percentage**: All values (e.g., `5`, `3`, `4`) are interpreted as percentages of the screen's **shortest dimension**.
+2. **Purpose**:
+   - Use **margin** for spacing **outside the widget**.
+   - Use **padding** for spacing **inside the widget**.
+3. **Responsive Design**: These methods ensure consistent spacing across devices with different screen sizes and orientations.
 
 ### Sizing
 
@@ -463,11 +751,18 @@ Container(
 
 | Feature                  | ResponsiveMedia       | flutter_screenutil |
 |--------------------------|-----------------------|--------------------|
-| Requires Context?        | ✅ Yes               | ✅ Yes             |
-| Uses Shortest Side?      | ✅ Yes               | ❌ No              |
-| Predefined TextStyles?   | ✅ Yes               | ❌ No              |
-| Orientation Support      | ✅ Yes               | ⚠️ Manual          |
-| Lightweight              | ✅ Zero dependencies | ⚠️ Heavier         |
+| Requires Context?        | ✅ Yes                | ✅ Yes             |
+| Uses Shortest Side?      | ✅ Yes                | ❌ No              |
+| Orientation Support      | ✅ Yes                | ⚠️ Manual          |
+| Lightweight              | ✅ Zero dependencies  | ⚠️ Heavier         |
+| Padding & Margin Support | ✅ Yes                | ⚠️ Limited         |
+| Dynamic Scaling          | ✅ Fully Dynamic      | ⚠️ Partially Fixed |
+| Typography Scaling       | ✅ Built-in           | ⚠️ Requires Manual |
+| Extensibility            | ✅ Highly Extensible  | ⚠️ Limited         |
+| Scaling Behaviors        | ✅ Granular Control   | ⚠️ Generalized     |
+| Community Support        | ⚠️ Growing            | ✅ Established     |
+| Documentation Quality    | ✅ Detailed           | ✅ Detailed        |
+| Ease of Use              | ✅ Beginner-Friendly  | ⚠️ Slightly Complex|
 
 ---
 
@@ -482,7 +777,10 @@ Container(
 
 ---
 
-          |
+
+## Author
+This package was created by **Peeyush Sachan**. For any questions or contributions, feel free to reach out via [GitHub](https://github.com/PeeyushSachan) or email at `sachana766@gmail.com`.
+
 
 ## 🏗 Planned Features
 

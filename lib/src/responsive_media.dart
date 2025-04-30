@@ -211,187 +211,193 @@ class ResponsiveMedia {
       });
 
   /// responsive title it will dynamicly ajust the size
+  /// Responsive title, dynamically adjusts the size
   double get title => dynamicSize({
-        'XS': shortestSide * 0.051,
-
-        /// was 0.035
-        'S': shortestSide * 0.058,
-
-        /// was 0.04
-        'M': shortestSide * 0.065,
-
-        /// was 0.045
-        'L': shortestSide * 0.072,
-
-        /// was 0.05
-        'XL': shortestSide * 0.079,
-
-        /// was 0.055
+        'XS': shortestSide * 0.052, // 26px
+        'S': shortestSide * 0.056, // 28px
+        'M': shortestSide * 0.06, // 30px
+        'L': shortestSide * 0.064, // 32px
+        'XL': shortestSide * 0.072, // 36px
       });
 
-  /// responsive subtitle it will dynamicly ajust the size
+  /// Responsive subtitle, dynamically adjusts the size
   double get subtitle => dynamicSize({
-        'XS': shortestSide * 0.043,
-
-        /// was 0.03
-        'S': shortestSide * 0.051,
-
-        /// was 0.035
-        'M': shortestSide * 0.058,
-
-        /// was 0.04
-        'L': shortestSide * 0.065,
-
-        /// was 0.045
-        'XL': shortestSide * 0.072,
-
-        /// was 0.05
+        'XS': shortestSide * 0.044, // 22px
+        'S': shortestSide * 0.048, // 24px
+        'M': shortestSide * 0.052, // 26px
+        'L': shortestSide * 0.056, // 28px
+        'XL': shortestSide * 0.064, // 32px
       });
 
-  /// responsive body it will dynamicly ajust the size
+  /// Responsive body text, dynamically adjusts the size
   double get body => dynamicSize({
-        'XS': shortestSide * 0.036,
-
-        /// was 0.025
-        'S': shortestSide * 0.043,
-
-        /// was 0.03
-        'M': shortestSide * 0.050,
-
-        /// was 0.035
-        'L': shortestSide * 0.058,
-
-        /// was 0.04
-        'XL': shortestSide * 0.065,
-
-        /// was 0.045
+        'XS': shortestSide * 0.036, // 18px
+        'S': shortestSide * 0.04, // 20px
+        'M': shortestSide * 0.044, // 22px
+        'L': shortestSide * 0.048, // 24px
+        'XL': shortestSide * 0.052, // 26px
       });
 
-  /// responsive caption it will dynamicly ajust the size
+  /// Responsive caption text, dynamically adjusts the size
   double get caption => dynamicSize({
-        'XS': shortestSide * 0.029,
-
-        /// was 0.02
-        'S': shortestSide * 0.036,
-
-        /// was 0.025
-        'M': shortestSide * 0.043,
-
-        /// was 0.03
-        'L': shortestSide * 0.050,
-
-        /// was 0.035
-        'XL': shortestSide * 0.058,
-
-        /// was 0.04
+        'XS': shortestSide * 0.032, // 16px
+        'S': shortestSide * 0.036, // 18px
+        'M': shortestSide * 0.04, // 20px
+        'L': shortestSide * 0.044, // 22px
+        'XL': shortestSide * 0.048, // 24px
       });
 
-  /// responsive bottonText it will dynamicly ajust the size. used for button text "click here"
+  /// Responsive button text, dynamically adjusts the size
   double get buttonText => dynamicSize({
-        'XS': shortestSide * 0.022,
-
-        /// was 0.022
-        'S': shortestSide * 0.027,
-
-        /// was 0.027
-        'M': shortestSide * 0.032,
-
-        /// was 0.032
-        'L': shortestSide * 0.037,
-
-        /// was 0.037
-        'XL': shortestSide * 0.042,
-
-        /// was 0.042
+        'XS': shortestSide * 0.028, // 14px
+        'S': shortestSide * 0.032, // 16px
+        'M': shortestSide * 0.036, // 18px
+        'L': shortestSide * 0.04, // 20px
+        'XL': shortestSide * 0.044, // 22px
       });
 
-  /// responsive overline it will dynamicly ajust the size
+  /// Responsive overline text, dynamically adjusts the size
   double get overline => dynamicSize({
-        'XS': shortestSide * 0.026,
-
-        /// was 0.018
-        'S': shortestSide * 0.033,
-
-        /// was 0.023
-        'M': shortestSide * 0.040,
-
-        /// was 0.028
-        'L': shortestSide * 0.048,
-
-        /// was 0.033
-        'XL': shortestSide * 0.055,
-
-        /// was 0.038
+        'XS': shortestSide * 0.028, // 14px
+        'S': shortestSide * 0.032, // 16px
+        'M': shortestSide * 0.036, // 18px
+        'L': shortestSide * 0.04, // 20px
+        'XL': shortestSide * 0.044, // 22px
       });
 
   /// spacing to for gaps
-  double get spacingXS => shortestSide * 0.016;
+  /// Dynamic spacing for gaps
+  double get spacingXS => dynamicSize({
+        'XS': shortestSide * 0.01, // Very small spacing for extra-small devices
+        'S': shortestSide * 0.012, // Slightly larger for small devices
+        'M': shortestSide * 0.014, // Medium spacing for medium devices
+        'L': shortestSide * 0.016, // Larger spacing for large devices
+        'XL': shortestSide * 0.018, // Largest spacing for extra-large devices
+      });
 
-  /// Previous: shortestSide * 0.012 (~4.5px) → Slightly increased
-  double get spacingS => shortestSide * 0.025;
+  /// Small devices get slightly more spacing
+  double get spacingS => dynamicSize({
+        'XS': shortestSide * 0.02,
+        'S': shortestSide * 0.025,
+        'M': shortestSide * 0.03,
+        'L': shortestSide * 0.035,
+        'XL': shortestSide * 0.04, // Scales properly for large devices
+      });
 
-  /// Previous: shortestSide * 0.025 (~9.4px) → Slightly increased
-  double get spacingM => shortestSide * 0.04;
+  ///  Mediam spacing
+  double get spacingM => dynamicSize({
+        'XS': shortestSide * 0.03,
+        'S': shortestSide * 0.035,
+        'M': shortestSide * 0.04,
+        'L': shortestSide * 0.045,
+        'XL': shortestSide * 0.05, // Comfortable spacing for most layouts
+      });
 
-  /// Previous: shortestSide * 0.045 (~16.9px) → Increased for better spacing
-  double get spacingL => shortestSide * 0.06;
+  ///  Large spacing
+  double get spacingL => dynamicSize({
+        'XS': shortestSide * 0.04,
+        'S': shortestSide * 0.05,
+        'M': shortestSide * 0.06,
+        'L': shortestSide * 0.07,
+        'XL': shortestSide * 0.08, // Appropriate for larger gaps
+      });
 
-  /// Previous: shortestSide * 0.07 (~26.25px) → Slightly increased
-  double get spacingXL => shortestSide * 0.085;
+  /// extra spacing
+  double get spacingXL => dynamicSize({
+        'XS': shortestSide * 0.05,
+        'S': shortestSide * 0.06,
+        'M': shortestSide * 0.07,
+        'L': shortestSide * 0.08,
+        'XL': shortestSide * 0.1, // Largest spacing for extra-large devices
+      });
 
-  /// Default padding for widgets
-  EdgeInsets get defaultPadding => EdgeInsets.all(shortestSide * 0.025);
-
-  /// Vertical padding for widgets
-  EdgeInsets get verticalPadding =>
-      EdgeInsets.symmetric(vertical: shortestSide * 0.025);
-
-  /// Horizontal padding for widgets
-  EdgeInsets get horizontalPadding =>
-      EdgeInsets.symmetric(horizontal: screenWidth * 0.045);
-
-  /// Margin values for consistent layout spacing
-  EdgeInsets get marginXS => EdgeInsets.all(spacingXS);
-
-  /// Small Margin values for consistent layout spacing
-
-  EdgeInsets get marginS => EdgeInsets.all(spacingS);
-
-  ///Mediam large Margin values for consistent layout spacing
-  EdgeInsets get marginM => EdgeInsets.all(spacingM);
-
-  /// large Margin values for consistent layout spacing
-  EdgeInsets get marginL => EdgeInsets.all(spacingL);
-
-  /// large Margin values for consistent layout spacing
-  EdgeInsets get marginXL => EdgeInsets.all(spacingXL);
-
-  /// Creates a gap (spacer) widget, either a custom widget or a SizedBox
-  Widget gap({Widget? customWidget, double? height, double? width}) {
-    if (customWidget != null) {
-      return customWidget;
-
-      /// Use a custom widget if provided
-    }
-    return SizedBox(height: height ?? spacingM, width: width ?? spacingM);
-
-    /// Default to a SizedBox spacer
+  /// In landscape mode, use the screen width for scaling.
+  double responsiveValue(double value) {
+    return isLandscape
+        ? (screenWidth * (value / 100)) // Use screen width in landscape
+        : (shortestSide * (value / 100)); // Use shortest side in portrait
   }
 
-  /// Predefined gaps for convenience
-  Widget gapXS() => gap(height: spacingXS);
+  /// Responsive padding for all sides
+  EdgeInsets paddingAll(double value) {
+    double padding = responsiveValue(value);
+    return EdgeInsets.all(padding);
+  }
 
-  /// small Predefined gaps for convenience
-  Widget gapS() => gap(height: spacingS);
+  /// Responsive padding for vertical sides (top and bottom)
+  EdgeInsets paddingVertical(double value) {
+    double padding = responsiveValue(value);
+    return EdgeInsets.symmetric(vertical: padding);
+  }
 
-  /// Mediam Predefined gaps for convenience
-  Widget gapM() => gap(height: spacingM);
+  /// Responsive padding for horizontal sides (left and right)
+  EdgeInsets paddingHorizontal(double value) {
+    double padding = responsiveValue(value);
+    return EdgeInsets.symmetric(horizontal: padding);
+  }
 
-  /// Large Predefined gaps for convenience
-  Widget gapL() => gap(height: spacingL);
+  /// Responsive margin for all sides
+  EdgeInsets marginAll(double value) {
+    double margin = responsiveValue(value);
+    return EdgeInsets.all(margin);
+  }
 
-  /// extra Large Predefined gaps for convenience
-  Widget gapXL() => gap(height: spacingXL);
+  /// Responsive margin for vertical sides (top and bottom)
+  EdgeInsets marginVertical(double value) {
+    double margin = responsiveValue(value);
+    return EdgeInsets.symmetric(vertical: margin);
+  }
+
+  /// Responsive margin for horizontal sides (left and right)
+  EdgeInsets marginHorizontal(double value) {
+    double margin = responsiveValue(value);
+    return EdgeInsets.symmetric(horizontal: margin);
+  }
+
+  /// Function to create a gap widget
+  /// - `customWidget`: A custom widget to use as a gap. If provided, it overrides the default gap behavior.
+  /// - `size`: The size of the gap, calculated based on predefined spacing and scaling.
+  /// - `isHorizontal`: Determines if the gap is horizontal. Defaults to `false` (vertical).
+  /// Returns a `SizedBox` with either its height (for vertical gaps) or width (for horizontal gaps) set.
+  Widget gap({
+    Widget? customWidget,
+    double? size,
+    bool isHorizontal = false, // Default is vertical
+  }) {
+    if (customWidget != null) {
+      return customWidget; // Use the custom widget if provided
+    }
+    return SizedBox(
+      height:
+          isHorizontal ? null : size ?? spacingM, // Set height for vertical gap
+      width: isHorizontal
+          ? size ?? spacingM
+          : null, // Set width for horizontal gap
+    );
+  }
+
+  /// Predefined gaps for convenience, now supporting both vertical and horizontal orientations and scaling.
+  /// Default is vertical, but can be switched to horizontal using `isHorizontal: true`.
+
+  /// Extra-small gap (spacingXS)
+  Widget gapXS({bool isHorizontal = false, double scale = 1.0}) =>
+      gap(size: spacingXS * scale, isHorizontal: isHorizontal);
+
+  /// Small gap (spacingS)
+  Widget gapS({bool isHorizontal = false, double scale = 1.0}) =>
+      gap(size: spacingS * scale, isHorizontal: isHorizontal);
+
+  /// Medium gap (spacingM)
+  Widget gapM({bool isHorizontal = false, double scale = 1.0}) =>
+      gap(size: spacingM * scale, isHorizontal: isHorizontal);
+
+  /// Large gap (spacingL)
+  Widget gapL({bool isHorizontal = false, double scale = 1.0}) =>
+      gap(size: spacingL * scale, isHorizontal: isHorizontal);
+
+  /// Extra-large gap (spacingXL)
+  Widget gapXL({bool isHorizontal = false, double scale = 1.0}) =>
+      gap(size: spacingXL * scale, isHorizontal: isHorizontal);
 
   /// Determines if the screen is in portrait mode
   bool get isPortrait => orientation == Orientation.portrait;

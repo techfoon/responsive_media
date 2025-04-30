@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.1] - 2025-04-30
+
+### Features
+- Enhanced gap functionality with the `scale` feature.
+- In gaps we can also give horizontal space by using `horizontal: true`.
+
+### Additions
+- Introduced new margin methods:
+  - `marginAll`
+  - `marginVertical`
+  - `marginHorizontal`
+- Introduced new padding methods:
+  - `paddingAll`
+  - `paddingVertical`
+  - `paddingHorizontal`
+
+### Enhancements
+- Improved typography system.
+
+
 ## [1.2.0] - 2025-04-24
 
 ### Added

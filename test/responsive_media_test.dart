@@ -64,8 +64,8 @@ void main() {
     });
 
     test('Spacing values are within expected range', () {
-      expect(rm.spacingXS, closeTo(400 * 0.016, 0.01));
-      expect(rm.spacingS, closeTo(400 * 0.025, 0.01));
+      expect(rm.spacingXS, closeTo(4.8, 0.01));
+      expect(rm.spacingS, closeTo(10.0, 0.01));
     });
 
     test('Orientation properties are accurate', () {

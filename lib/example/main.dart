@@ -1,30 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_media/responsive_media.dart';
 
-void main() {
-  runApp(const MyApp());
-}
-
-/// MyApp Class
-class MyApp extends StatelessWidget {
-  /// Constructor for MyApp with an optional key
-  const MyApp({Key? key}) : super(key: key);
+///ResponsiveExample class
+class ResponsiveExample extends StatelessWidget {
+  ///ResponsiveExaple
+  const ResponsiveExample({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: ResponsiveExampleScreen(),
-    );
-  }
-}
-
-/// It is Example ResponsiveMedia
-class ResponsiveExampleScreen extends StatelessWidget {
-  /// Constructor for ResponsiveExampleScreen with an optional key
-  const ResponsiveExampleScreen({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
+    // Initialize ResponsiveMedia for the current screen
     /// Initialize ResponsiveMedia
     ResponsiveMedia.init(context);
     final rm = ResponsiveMedia.instance; // Use final instance for convenience
@@ -33,96 +17,49 @@ class ResponsiveExampleScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Responsive Media Example'),
       ),
-      body: Padding(
-        padding: EdgeInsets.all(rm.spacingS), // Use spacing for padding
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            // Orientation-Specific Widget
-            rm.isPortrait
-                ? Text(
-                    'Portrait Mode: Adjusted for vertical layout',
-                    style: TextStyle(fontSize: rm.h1), // Use typography
-                  )
-                : Text(
-                    'Landscape Mode: Adjusted for horizontal layout',
-                    style: TextStyle(fontSize: rm.h1),
+      body: Center(
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // Display device size category
+              Text(
+                'Size Category: ${rm.sizeCategory}',
+                style: TextStyle(fontSize: rm.h1),
+              ),
+              SizedBox(height: rm.spacingS),
+
+              // Example of dynamic box sizing based on orientation
+              Container(
+                width: rm.getResponsiveBox(
+                    200, 300), // Portrait: 200, Landscape: 300
+                height: rm.getResponsiveBox(
+                    100, 150), // Portrait: 100, Landscape: 150
+                color: Colors.blueAccent,
+                child: Center(
+                  child: Text(
+                    'Responsive Box',
+                    style: TextStyle(fontSize: rm.body, color: Colors.white),
                   ),
-            SizedBox(height: rm.spacingM), // Add spacing
-
-            // Responsive Box Example
-            Container(
-              height: rm.getResponsiveBox(150, 300),
-              width: rm.getResponsiveBox(100, 200),
-              color: Colors.blue,
-              child: Center(
-                child: Text(
-                  'Responsive Box\n${rm.isPortrait ? "Portrait" : "Landscape"}',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: rm.body, color: Colors.white),
                 ),
               ),
-            ),
-            SizedBox(height: rm.spacingM),
+              SizedBox(height: rm.spacingS),
 
-            // Dynamic Size Example
-            Text(
-              'Dynamic Size Example',
-              style: TextStyle(fontSize: rm.h2),
-            ),
-            Container(
-              height: rm.dynamicSize({
-                'XS': 50,
-                'S': 100,
-                'M': 150,
-                'L': 200,
-                'XL': 250,
-              }),
-              width: double.infinity,
-              color: Colors.green,
-              child: Center(
+              // Example of margin and padding utilities
+              Container(
+                margin: rm.marginAll(5), // added 5% margin from all Side
+                padding: rm.paddingAll(5), // added 5% padding from all
+                decoration: BoxDecoration(
+                  color: Colors.greenAccent,
+                  borderRadius: BorderRadius.circular(10),
+                ),
                 child: Text(
-                  'This adjusts dynamically based on size category (${rm.sizeCategory})',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: rm.caption, color: Colors.white),
+                  'Margin & Padding Example',
+                  style: TextStyle(fontSize: rm.body),
                 ),
               ),
-            ),
-            SizedBox(height: rm.spacingL),
-
-            // Typography Showcase
-            Text(
-              'Typography Examples:',
-              style: TextStyle(fontSize: rm.title),
-            ),
-            Text(
-              'This is H1',
-              style: TextStyle(fontSize: rm.h1),
-            ),
-            Text(
-              'This is H2',
-              style: TextStyle(fontSize: rm.h2),
-            ),
-            Text(
-              'This is Body Text',
-              style: TextStyle(fontSize: rm.body),
-            ),
-            Text(
-              'This is Caption',
-              style: TextStyle(fontSize: rm.caption),
-            ),
-
-            SizedBox(height: rm.spacingL),
-
-            // Debug Info
-            Text(
-              'Debug Info:',
-              style: TextStyle(fontSize: rm.title),
-            ),
-            Text(
-              rm.toString(), // Print debug info from ResponsiveMedia
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
