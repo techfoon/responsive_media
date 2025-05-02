@@ -25,7 +25,7 @@ Add the package to your `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  responsive_media: ^1.2.1
+  responsive_media: ^1.2.2
 ```
 
 ### 2. Fetch the Package
@@ -745,6 +745,18 @@ This table provides a quick overview of the predefined methods for applying **ma
 | `0.03.rs`   | 3% of the shortest screen side            |
 | `0.03.rl`   | 3% of the  longest screen side            |
 
+
+---
+
+
+## Summary Table
+
+| **Feature**            | **Description**                                                                                | **Example Usage**                                                                 |
+|------------------------|------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------|
+| **`isPortrait`**       | Returns `true` if the screen orientation is in **portrait** mode.                              | `if (ResponsiveMedia.instance.isPortrait) print('Portrait Mode');`                |
+| **`isLandscape`**      | Returns `true` if the screen orientation is in **landscape** mode.                             | `if (ResponsiveMedia.instance.isLandscape) print('Landscape Mode');`              |
+| **`getResponsiveBox`** | Dynamically returns a value based on the current orientation. Accepts `portraitValue` and `landscapeValue`. | `double size = ResponsiveMedia.instance.getResponsiveBox(100, 200);` |   
+
 ---
 
 ## 🔍 Comparison with `flutter_screenutil`
@@ -765,22 +777,6 @@ This table provides a quick overview of the predefined methods for applying **ma
 | Ease of Use              | ✅ Beginner-Friendly  | ⚠️ Slightly Complex|
 
 ---
-
-
-## Summary Table
-
-| **Feature**            | **Description**                                                                                | **Example Usage**                                                                 |
-|------------------------|------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------|
-| **`isPortrait`**       | Returns `true` if the screen orientation is in **portrait** mode.                              | `if (ResponsiveMedia.instance.isPortrait) print('Portrait Mode');`                |
-| **`isLandscape`**      | Returns `true` if the screen orientation is in **landscape** mode.                             | `if (ResponsiveMedia.instance.isLandscape) print('Landscape Mode');`              |
-| **`getResponsiveBox`** | Dynamically returns a value based on the current orientation. Accepts `portraitValue` and `landscapeValue`. | `double size = ResponsiveMedia.instance.getResponsiveBox(100, 200);` |   
-
----
-
-
-## Author
-This package was created by **Peeyush Sachan**. For any questions or contributions, feel free to reach out via [GitHub](https://github.com/PeeyushSachan) or email at `sachana766@gmail.com`.
-
 
 ## 🏗 Planned Features
 

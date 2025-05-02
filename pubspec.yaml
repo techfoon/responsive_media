@@ -1,6 +1,6 @@
 name: responsive_media
 description: A responsive utility for Flutter to simplify scaling text, padding, and layout.
-version: 1.2.1
+version: 1.2.2
 
 # Website for your package (optional but good)
 homepage: https://github.com/techfoon/responsive_media
