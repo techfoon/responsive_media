@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.3-beta.1] - 2025-10-19
+
+### Added
+- Introduced **Advanced Breakpoints Extension** allowing flexible device detection helpers:
+  - `isMobile`, `isTablet`, `isDesktop` checks
+  - Custom breakpoints via `ResponsiveMediaBreakpointConfig`
+  - Helper methods like `between()`, `largerThan()`, `smallerThan()`, and `isBreakpoint()`
+- Added support for **valueByDevice()** and **valueByBreakpoint()** to simplify responsive logic.
+- Included multiple preset breakpoint configurations:
+  - Bootstrap, Tailwind CSS, Material Design, Device-based, Apple, Web-focused
+
+### Improved
+- Enhanced **README.md** documentation with detailed examples and setup instructions.
+- Added **integration-guide.md** for developers to easily use advanced features in existing projects.
+- Improved API consistency between `ResponsiveMedia` and `AdvancedBreakpoints`.
+
+### Fixed
+- Minor bug fixes and optimizations for margin and spacing calculations across different orientations.
+- Fixed an issue with responsive typography scaling inconsistencies on tablets.
+
+### Notes
+- This release is a **beta** version focusing on advanced breakpoint functionality.  
+- Backward compatibility is fully maintained — no breaking changes.
 
 ## [1.2.2] - 2025-05-01
 - Readme Updated.

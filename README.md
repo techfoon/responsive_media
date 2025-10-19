@@ -25,7 +25,7 @@ Add the package to your `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  responsive_media: ^1.2.2
+  responsive_media: ^1.2.3-beta.1
 ```
 
 ### 2. Fetch the Package
@@ -685,6 +685,517 @@ Container(
 
 ---
 
+
+## 🎯 Advanced Breakpoints
+
+### Device Type Detection
+
+Easily detect device types with simple boolean checks:
+
+```dart
+final responsive = ResponsiveMedia.instance;
+
+if (responsive.isMobile) {
+  // Mobile layout (width < 768px)
+  return MobileLayout();
+}
+
+if (responsive.isTablet) {
+  // Tablet layout (width 768px - 1024px)
+  return TabletLayout();
+}
+
+if (responsive.isDesktop) {
+  // Desktop layout (width >= 1024px)
+  return DesktopLayout();
+}
+```
+
+### Setup Custom Breakpoints
+
+Configure custom breakpoints before initializing ResponsiveMedia:
+
+```dart
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Builder(
+        builder: (context) {
+          // Configure breakpoints BEFORE init
+          ResponsiveMediaBreakpointConfig.configure(
+            customBreakpoints: {
+              'phone': 375,
+              'tablet': 768,
+              'laptop': 1200,
+              'desktop': 1920,
+              '4K': 2560,
+            },
+            mobileBreakpoint: 600,
+            tabletBreakpoint: 1024,
+          );
+          
+          // Initialize ResponsiveMedia
+          ResponsiveMedia.init(context);
+          
+          return MyHomePage();
+        },
+      ),
+    );
+  }
+}
+```
+
+### Custom Breakpoint Methods
+
+```dart
+final rm = ResponsiveMedia.instance;
+
+// Check if current width matches breakpoint
+if (rm.isBreakpoint('tablet')) {
+  print('Tablet breakpoint active');
+}
+
+// Check if larger than breakpoint
+if (rm.largerThan('laptop')) {
+  print('Screen is larger than laptop');
+}
+
+// Check if smaller than breakpoint
+if (rm.smallerThan('desktop')) {
+  print('Screen is smaller than desktop');
+}
+
+// Check if between two breakpoints
+if (rm.between('tablet', 'laptop')) {
+  print('Screen is between tablet and laptop');
+}
+
+// Get current active breakpoint name
+print('Current: ${rm.currentBreakpoint}');
+```
+
+### Predefined Breakpoint Sets
+
+Use industry-standard breakpoint sets:
+
+#### Bootstrap Breakpoints
+```dart
+ResponsiveMediaBreakpointConfig.configure(
+  customBreakpoints: CommonBreakpoints.bootstrap,
+);
+// xs: 0, sm: 576, md: 768, lg: 992, xl: 1200, xxl: 1400
+```
+
+#### Material Design Breakpoints
+```dart
+ResponsiveMediaBreakpointConfig.configure(
+  customBreakpoints: CommonBreakpoints.material,
+);
+// compact: 0, medium: 600, expanded: 840, large: 1240, extraLarge: 1600
+```
+
+#### Tailwind CSS Breakpoints
+```dart
+ResponsiveMediaBreakpointConfig.configure(
+  customBreakpoints: CommonBreakpoints.tailwind,
+);
+// sm: 640, md: 768, lg: 1024, xl: 1280, 2xl: 1536
+```
+
+#### Device-Specific Breakpoints
+```dart
+ResponsiveMediaBreakpointConfig.configure(
+  customBreakpoints: CommonBreakpoints.devices,
+);
+// mobileSmall: 320, mobileMedium: 375, mobileLarge: 425,
+// tablet: 768, laptop: 1024, laptopLarge: 1440, desktop: 1920, 4k: 2560
+```
+
+#### Apple Device Breakpoints
+```dart
+ResponsiveMediaBreakpointConfig.configure(
+  customBreakpoints: CommonBreakpoints.apple,
+);
+// iPhoneSE: 375, iPhone: 390, iPhoneMax: 428, iPadMini: 768,
+// iPad: 810, iPadPro: 1024, macBook: 1440, iMac: 1920
+```
+
+#### Web-Focused Breakpoints
+```dart
+ResponsiveMediaBreakpointConfig.configure(
+  customBreakpoints: CommonBreakpoints.web,
+);
+// mobile: 480, tablet: 768, desktop: 1024, wide: 1440, ultraWide: 1920
+```
+
+### Helper Methods
+
+#### valueByDevice
+
+Return different values based on device type:
+
+```dart
+Container(
+  width: responsive.valueByDevice(
+    mobile: 300.0,
+    tablet: 500.0,
+    desktop: 800.0,
+  ),
+  padding: EdgeInsets.all(
+    responsive.valueByDevice(
+      mobile: 16.0,
+      tablet: 24.0,
+      desktop: 32.0,
+    ),
+  ),
+  child: Text(
+    'Responsive Container',
+    style: TextStyle(
+      fontSize: responsive.valueByDevice(
+        mobile: 14.0,
+        tablet: 18.0,
+        desktop: 24.0,
+      ),
+    ),
+  ),
+);
+```
+
+#### valueByBreakpoint
+
+Return values based on custom breakpoints:
+
+```dart
+final fontSize = responsive.valueByBreakpoint(
+  breakpointValues: {
+    'phone': 12.0,
+    'tablet': 16.0,
+    'laptop': 20.0,
+    'desktop': 24.0,
+  },
+  defaultValue: 16.0,
+);
+
+Text('Dynamic Font', style: TextStyle(fontSize: fontSize));
+```
+
+---
+
+## 📚 Complete Usage Examples
+
+### Example 1: Simple Responsive Layout
+
+```dart
+class ResponsivePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final rm = ResponsiveMedia.instance;
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Responsive Layout'),
+      ),
+      body: Padding(
+        padding: rm.paddingAll(5),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Welcome',
+              style: TextStyle(
+                fontSize: rm.h1,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            rm.gapM(),
+            if (rm.isMobile)
+              _buildMobileContent(rm)
+            else if (rm.isTablet)
+              _buildTabletContent(rm)
+            else
+              _buildDesktopContent(rm),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildMobileContent(ResponsiveMedia rm) {
+    return Column(
+      children: [
+        Text('Mobile Layout', style: TextStyle(fontSize: rm.h3)),
+        rm.gapS(),
+        Text('Optimized for small screens'),
+      ],
+    );
+  }
+
+  Widget _buildTabletContent(ResponsiveMedia rm) {
+    return Row(
+      children: [
+        Expanded(
+          child: Text('Tablet Layout', style: TextStyle(fontSize: rm.h3)),
+        ),
+        rm.gapM(isHorizontal: true),
+        Expanded(
+          child: Text('Two column layout'),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildDesktopContent(ResponsiveMedia rm) {
+    return Row(
+      children: [
+        Expanded(flex: 2, child: Text('Main Content')),
+        rm.gapL(isHorizontal: true),
+        Expanded(flex: 1, child: Text('Sidebar')),
+      ],
+    );
+  }
+}
+```
+
+### Example 2: Responsive Grid
+
+```dart
+class ResponsiveGrid extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final rm = ResponsiveMedia.instance;
+
+    return GridView.builder(
+      padding: rm.paddingAll(4),
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: rm.valueByDevice(
+          mobile: 1,
+          tablet: 2,
+          desktop: 4,
+        ),
+        mainAxisSpacing: rm.spacingM,
+        crossAxisSpacing: rm.spacingM,
+        childAspectRatio: 1.5,
+      ),
+      itemCount: 12,
+      itemBuilder: (context, index) {
+        return Container(
+          decoration: BoxDecoration(
+            color: Colors.blue,
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Center(
+            child: Text(
+              'Item ${index + 1}',
+              style: TextStyle(
+                fontSize: rm.body,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+```
+
+### Example 3: Custom Breakpoints
+
+```dart
+class CustomBreakpointPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final rm = ResponsiveMedia.instance;
+
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text('Current: ${rm.currentBreakpoint}'),
+            rm.gapM(),
+            
+            if (rm.isBreakpoint('4K'))
+              _build4KLayout()
+            else if (rm.isBreakpoint('desktop'))
+              _buildDesktopLayout()
+            else if (rm.isBreakpoint('laptop'))
+              _buildLaptopLayout()
+            else if (rm.isBreakpoint('tablet'))
+              _buildTabletLayout()
+            else
+              _buildPhoneLayout(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _build4KLayout() => Text('4K Ultra HD Display');
+  Widget _buildDesktopLayout() => Text('Desktop Display');
+  Widget _buildLaptopLayout() => Text('Laptop Display');
+  Widget _buildTabletLayout() => Text('Tablet Display');
+  Widget _buildPhoneLayout() => Text('Phone Display');
+}
+```
+
+### Example 4: Responsive Card
+
+```dart
+class ResponsiveCard extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final rm = ResponsiveMedia.instance;
+
+    return Container(
+      width: rm.valueByDevice(
+        mobile: double.infinity,
+        tablet: 500,
+        desktop: 600,
+      ),
+      margin: rm.marginAll(3),
+      padding: rm.paddingAll(4),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black12,
+            blurRadius: 8,
+            offset: Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Card Title',
+            style: TextStyle(
+              fontSize: rm.h3,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          rm.gapS(),
+          Text(
+            'Card description text that adapts to screen size.',
+            style: TextStyle(fontSize: rm.body),
+          ),
+          rm.gapM(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              TextButton(
+                onPressed: () {},
+                child: Text(
+                  'Action',
+                  style: TextStyle(fontSize: rm.buttonText),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+```
+
+### Example 5: Responsive Navigation
+
+```dart
+class ResponsiveScaffold extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final rm = ResponsiveMedia.instance;
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Responsive Nav'),
+        actions: rm.isDesktop
+            ? [
+                TextButton(
+                  onPressed: () {},
+                  child: Text('Home'),
+                ),
+                TextButton(
+                  onPressed: () {},
+                  child: Text('About'),
+                ),
+                TextButton(
+                  onPressed: () {},
+                  child: Text('Contact'),
+                ),
+              ]
+            : null,
+      ),
+      drawer: rm.isMobile || rm.isTablet
+          ? Drawer(
+              child: ListView(
+                children: [
+                  DrawerHeader(child: Text('Menu')),
+                  ListTile(title: Text('Home')),
+                  ListTile(title: Text('About')),
+                  ListTile(title: Text('Contact')),
+                ],
+              ),
+            )
+          : null,
+      body: Center(child: Text('Content')),
+    );
+  }
+}
+```
+
+---
+
+## 🎨 Advanced Configuration
+
+### Custom Scaling
+
+```dart
+// Global scaling
+ResponsiveMedia.init(context, scale: 1.2);
+
+// Or custom dimensions
+ResponsiveMedia.init(
+  context,
+  customHeight: 800,
+  customWidth: 1200,
+  scale: 1.1,
+);
+```
+
+### Dynamic Breakpoint Management
+
+```dart
+// Add breakpoint
+ResponsiveMediaBreakpointConfig.addBreakpoint('ultraWide', 2560);
+
+// Check if exists
+bool exists = ResponsiveMediaBreakpointConfig.hasBreakpoint('ultraWide');
+
+// Get value
+double? value = ResponsiveMediaBreakpointConfig.getBreakpointValue('ultraWide');
+
+// Get all names
+List<String> names = ResponsiveMediaBreakpointConfig.breakpointNames;
+
+// Remove breakpoint
+ResponsiveMediaBreakpointConfig.removeBreakpoint('ultraWide');
+
+// Reset to defaults
+ResponsiveMediaBreakpointConfig.reset();
+```
+
+---
+
+
 ## 🛠 API Summary
 
 ### Typography
@@ -778,11 +1289,40 @@ This table provides a quick overview of the predefined methods for applying **ma
 
 ---
 
+### Advanced Breakpoint Methods
+
+| Method | Description |
+|--------|-------------|
+| `isBreakpoint(name)` | Check if breakpoint is active |
+| `largerThan(name)` | Check if screen is larger |
+| `smallerThan(name)` | Check if screen is smaller |
+| `between(start, end)` | Check if in range |
+| `currentBreakpoint` | Get active breakpoint name |
+| `valueByDevice({mobile, tablet, desktop})` | Get value by device |
+| `valueByBreakpoint({values, default})` | Get value by breakpoint |
+
+
+
+---
+
+## 🐛 Troubleshooting
+
+### Issue: "Late variable not initialized"
+**Solution**: Make sure you call `ResponsiveMedia.init(context)` before accessing the instance.
+
+### Issue: Custom breakpoints not working
+**Solution**: Call `ResponsiveMediaBreakpointConfig.configure()` BEFORE `ResponsiveMedia.init()`.
+
+### Issue: Breakpoint values seem wrong
+**Solution**: Check that you're using screen width (not height) for breakpoint comparisons.
+
+---
+
+
 ## 🏗 Planned Features
 
 ### 🚧 Version 1.3.0 (Coming Soon)
 - `ResponsiveMediaBuilder`: A widget for automatic context injection.
-- **Advanced Breakpoints**: Helpers such as `isMobile`, `isTablet`, `isDesktop`.
 - **Theme-Aware Styles**: Support for light and dark mode text styles.
 
 ---
